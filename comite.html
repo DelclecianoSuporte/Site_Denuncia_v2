@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <section>
+            <div class="container mb-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Comitê de denúncias</h2>
+                        <hr>
+                        <div class="form-group form-control">
+                            <p style="font-weight: bold;">Selecione um protocolo</p>
+                            <select class="form-control" name="protocolos-aberto" id="protocolos-aberto">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mb-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-control div-mensagem-denuncia">
+                            <textarea readonly class="form-control" name="mensagem-denuncia" id="mensagem-denuncia" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div  class="form-group form-control div-resposta-comite">
+                            <p style="font-weight: bold;">Responda a denúncia</p>
+                            <textarea class="form-control" name="resposta-comite" id="resposta-comite" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container mt-4 mb-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="div-enviar-resposta">
+                        <button class="btn btn-outline-info enviar-resposta" id="enviar-resposta">
+                            Enviar Resposta
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="comite-script.js"></script>
+    </body>
+</html>
+
+
+<!-- <a href="index.html">
+    <button class="btn btn-outline-info">Voltar</button>
+</a> -->

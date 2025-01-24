@@ -1,0 +1,21 @@
+
+html, body {
+    height: 100%;
+}
+
+input[type="email"],
+input[type="password"] 
+{
+    color: white; 
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus
+{
+    color: white;
+}
+
+.form-container {
+    max-width: 350px;
+    padding: 1rem;
+}

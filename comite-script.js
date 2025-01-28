@@ -9,7 +9,7 @@ function preencherSelectComProtocolos() {
     fetch('https://localhost:7114/api/denuncias/protocolos/abertos')
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            //console.log(data);
 
             if (data && data.data && Array.isArray(data.data)) {
                 const select = document.getElementById('protocolos-aberto');
@@ -40,32 +40,80 @@ function resposta_Denuncia() {
     const divMensagem = document.querySelector('.div-mensagem-denuncia');
     const divRespostaComite = document.querySelector('.div-resposta-comite');
     const divEnviarResposta = document.querySelector('.div-enviar-resposta');
+    const divAnexoDenuncia = document.querySelector('.div-anexo-denuncia');
 
-    select.addEventListener('change', function () {
+    select.addEventListener('change', async function () {
         const selectedOption = select.options[select.selectedIndex];
-        const mensagemRetornada = selectedOption.dataset.mensagem;
+        const numeroProtocolo = selectedOption.value;
 
-        if (selectedOption.value) {
-            divMensagem.style.display = 'block';
-            campoAdicionaMensagem.value = mensagemRetornada;
-            divRespostaComite.style.display = 'block';
-            divEnviarResposta.style.display = 'block';
-        } else {
-            campoAdicionaMensagem.value = ''; 
+        campoAdicionaMensagem.value = '';
+        divAnexoDenuncia.innerHTML = '<p style="font-weight: bold;">Anexos</p>';
+
+        if (numeroProtocolo) {
+            try {
+                const response = await fetch(`https://localhost:7114/api/denuncias/${numeroProtocolo}`);
+                
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar denúncias');
+                }
+
+                const denuncias = await response.json();
+
+                if (denuncias.success && Array.isArray(denuncias.data)) {
+                    const mensagens = denuncias.data.map(denuncia => denuncia.mensagem).join('\n\n');
+                    campoAdicionaMensagem.value = mensagens;
+
+                    denuncias.data.forEach(denuncia => {
+                        if (denuncia.imagens && denuncia.imagens.length > 0) {
+                            denuncia.imagens.forEach(imagem => {
+
+                                const container = document.createElement('div');
+                                container.style.marginBottom = '20px';
+
+                                const imgElement = document.createElement('img');
+                                imgElement.src = `data:${imagem.tipo};base64,${imagem.conteudo}`;
+                                imgElement.alt = imagem.nomeArquivo;
+                                imgElement.style.width = '200px';
+                                imgElement.style.display = 'block';
+                                imgElement.style.marginBottom = '10px';
+
+                                const downloadButton = document.createElement('button');
+                                downloadButton.textContent = 'Download';
+                                downloadButton.style.display = 'block';
+                                downloadButton.style.marginTop = '5px';
+                                downloadButton.classList.add('btn', 'btn-outline-info');
+
+                                downloadButton.addEventListener('click', () => {
+                                    const link = document.createElement('a');
+                                    link.href = imgElement.src;
+                                    link.download = imagem.nomeArquivo || 'imagem-denuncia';
+                                    link.click();
+                                });
+
+                                container.appendChild(imgElement);
+                                container.appendChild(downloadButton);
+
+                                divAnexoDenuncia.appendChild(container);
+                            });
+                        }
+                    });
+                }
+
+                divMensagem.style.display = 'block';
+                divRespostaComite.style.display = 'block';
+                divEnviarResposta.style.display = 'block';
+                divAnexoDenuncia.style.display = 'block';
+            } 
+            catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao carregar os dados da denúncia.');
+            }
+        } 
+        else {
             divMensagem.style.display = 'none';
             divRespostaComite.style.display = 'none';
             divEnviarResposta.style.display = 'none';
-        }
-
-        if (selectedOption.value !== textarea.dataset.selectedOption) {
-            textarea.value = '';
-            textarea.dataset.selectedOption = selectedOption.value;
-        }
-
-        if (selectedOption.value) {
-            textarea.style.display = 'block';
-        } else {
-            textarea.style.display = 'none';
+            divAnexoDenuncia.style.display = 'none';
         }
     });
 
@@ -73,6 +121,7 @@ function resposta_Denuncia() {
 }
 
 resposta_Denuncia();
+
 
 const botaoEnviar = document.getElementById('enviar-resposta');
 

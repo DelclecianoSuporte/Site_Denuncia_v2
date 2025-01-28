@@ -1,31 +1,39 @@
-// Recupere o parâmetro 'protocolo' da URL
-const urlParams = new URLSearchParams(window.location.search);
-const protocolo = urlParams.get('protocolo');
+async function carregarProtocolos() {
+    const tabelaProtocolos = document.querySelector('.tabela-protocolo tbody');
+    tabelaProtocolos.innerHTML = ''; // Limpar a tabela antes de adicionar novos dados
 
-// Agora, 'protocolo' contém o número aleatório que você passou da página anterior
-console.log(protocolo);
+    try {
+        const response = await fetch('https://localhost:7114/api/denuncias/protocolos');
+        if (!response.ok) {
+            throw new Error('Erro ao carregar protocolos');
+        }
 
+        const protocolos = await response.json(); // Parse da resposta JSON
+        console.log(protocolos)
 
-function obterDataHoraFormatada() {
-    const dataHoraAtual = new Date();
-    const dia = String(dataHoraAtual.getDate()).padStart(2, '0');
-    const mes = String(dataHoraAtual.getMonth() + 1).padStart(2, '0'); // Note que os meses são base 0 (janeiro = 0)
-    const ano = dataHoraAtual.getFullYear();
-    const horas = String(dataHoraAtual.getHours()).padStart(2, '0');
-    const minutos = String(dataHoraAtual.getMinutes()).padStart(2, '0');
+        // Verifique se a resposta tem a chave "data" e se é um array
+        if (protocolos.data && Array.isArray(protocolos.data)) {
+            protocolos.data.forEach(protocolo => {
+                // Criando uma nova linha para cada protocolo
+                const linha = document.createElement('tr');
+                linha.innerHTML = `
+                    <td>${protocolo.numero_Protocolo}</td>
+                    <td>${new Date(protocolo.data_Protocolo).toLocaleString()}</td>
+                    <td>${protocolo.status}</td>
+                `;
 
-    const dataHoraFormatada = `${dia}-${mes}-${ano} ${horas}:${minutos}`;
-    return dataHoraFormatada;
+                tabelaProtocolos.appendChild(linha);
+            });
+        } 
+        else {
+            alert('A API está desligada ou não há registros. Ligue a API para buscar os registros.');
+            console.error('A resposta da API não contém um array de protocolos.');
+        }
+    } 
+    catch (error) {
+        alert('A API está desligada ou não há registros. Ligue a API para buscar os registros.');
+        console.error('Erro ao carregar protocolos:', error);
+    }
 }
 
-function criarTabelaComProtocolo() {
-    const numeroProtocolo = protocolo; // Substitua pelo seu número de protocolo
-    const dataHoraFormatada = obterDataHoraFormatada();
-
-    document.getElementById("numeroProtocolo").textContent = numeroProtocolo;
-    document.getElementById("dataAtual").textContent = dataHoraFormatada;
-}
-
-//Chame a fução para criar a tabela
-criarTabelaComProtocolo();
-
+document.addEventListener('DOMContentLoaded', carregarProtocolos);

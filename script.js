@@ -79,145 +79,68 @@ opcoes.forEach((opcao) => {
 });
 
 
-// document.addEventListener('change', function() {
-//     const opcaoSelecionada = document.getElementById("opcao1").value;
-//     const opcaoSelecionada2 = document.getElementById("opcao2").value;
-//     const opcaoSelecionada3 = document.getElementById("opcao3").value;
-//     const opcaoDigitada1    = document.getElementById("area-setor").value;
-//     const opcaoSelecionada4 = document.getElementById("opcao4").value;
-//     const opcaoSelecionada5 = document.getElementById("opcao5").value;
-//     const opcaoSelecionada6 = document.getElementById("opcao6").value;
-//     const opcaoSelecionada7 = document.getElementById("opcao7").value;
-//     const opcaoDigitada2    = document.getElementById("descricao").value;
-//     const opcaoDigitada3    = document.getElementById("testemunha").value;
-//     const opcaoDigitada4    = document.getElementById("descricao2").value;
-//     const opcaoDigitada5    = document.getElementById("descricao3").value;
+// Executa a função somente na página denuncia.html
+// Executa a função somente na página denuncia.html
+if (window.location.pathname.includes('denuncia.html')) {
+    document.addEventListener('change', function () {
+        const campos = [
+            { entradaUsuario: "opcao1", exibicao: "opcao_exibicao1" },
+            { entradaUsuario: "opcao2", exibicao: "opcao_exibicao2" },
+            { entradaUsuario: "opcao3", exibicao: "opcao_exibicao3" },
+            { entradaUsuario: "area-setor", exibicao: "opcao_exibicao4" },
+            { entradaUsuario: "opcao4", exibicao: "opcao_exibicao5" },
+            { entradaUsuario: "opcao5", exibicao: "opcao_exibicao6" },
+            { entradaUsuario: "opcao6", exibicao: "opcao_exibicao7" },
+            { entradaUsuario: "opcao7", exibicao: "opcao_exibicao8" },
+            { entradaUsuario: "descricao", exibicao: "opcao_exibicao9" },
+            { entradaUsuario: "testemunha", exibicao: "opcao_exibicao10" },
+            { entradaUsuario: "descricao2", exibicao: "opcao_exibicao11" },
+            { entradaUsuario: "descricao3", exibicao: "opcao_exibicao12" }
+        ];
 
-//     const campo1 = document.getElementById("opcao_exibicao1");
-//     if(campo1){
-//         campo1.textContent = opcaoSelecionada;
-//     }
+        campos.forEach(campo => {
+            const entradaUsuario = document.getElementById(campo.entradaUsuario);
+            const exibicao = document.getElementById(campo.exibicao);
 
-//     const campo2 = document.getElementById("opcao_exibicao2")
-//     if(campo2){
-//         campo2.textContent = opcaoSelecionada2;
-//     }
+            // Atualiza o conteúdo apenas se os elementos existirem
+            if (entradaUsuario && exibicao) {
+                exibicao.textContent = entradaUsuario.value;
+            }
+        });
 
-//     const campo3 = document.getElementById("opcao_exibicao3");
-//     if(campo3){
-//         campo3.textContent = opcaoSelecionada3;
-//     }
-
-//     const campo4 = document.getElementById("opcao_exibicao4");
-//     if(campo4){
-//         campo4.textContent = opcaoDigitada1;
-//     }
-
-//     const campo5 = document.getElementById("opcao_exibicao5");
-//     if(campo5){
-//         campo5.textContent = opcaoSelecionada4;
-//     }
-
-//     const campo6 = document.getElementById("opcao_exibicao6");
-//     if(campo6){
-//         campo6.textContent = opcaoSelecionada5;
-//     }
-
-//     const campo7 = document.getElementById("opcao_exibicao7");
-//     if(campo7){
-//         campo7.textContent = opcaoSelecionada6;
-//     }
-
-//     const campo8 = document.getElementById("opcao_exibicao8");
-//     if(campo8){
-//         campo8.textContent = opcaoSelecionada7;
-//     }
-
-//     const campo9 = document.getElementById("opcao_exibicao9");
-//     if(campo9){
-//         campo9.textContent = opcaoDigitada2;
-//     }
-
-//     const campo10 = document.getElementById("opcao_exibicao10");
-//     if(campo10){
-//         campo10.textContent = opcaoDigitada3;
-//     }
-
-//     const campo11 = document.getElementById("opcao_exibicao11");
-//     if(campo11){
-//         campo11.textContent = opcaoDigitada4;
-//     }
-
-//     const campo12 = document.getElementById("opcao_exibicao12");
-//     if(campo12){
-//         campo12.textContent = opcaoDigitada5;
-//     }
-
-//     criaEmailComDadosInseridosPeloUsuario();
-// });
-
-document.addEventListener('change', function () {
-
-    const campos = [
-        { entradaUsuario: "opcao1", exibicao: "opcao_exibicao1" },
-        { entradaUsuario: "opcao2", exibicao: "opcao_exibicao2" },
-        { entradaUsuario: "opcao3", exibicao: "opcao_exibicao3" },
-        { entradaUsuario: "area-setor", exibicao: "opcao_exibicao4" },
-        { entradaUsuario: "opcao4", exibicao: "opcao_exibicao5" },
-        { entradaUsuario: "opcao5", exibicao: "opcao_exibicao6" },
-        { entradaUsuario: "opcao6", exibicao: "opcao_exibicao7" },
-        { entradaUsuario: "opcao7", exibicao: "opcao_exibicao8" },
-        { entradaUsuario: "descricao", exibicao: "opcao_exibicao9" },
-        { entradaUsuario: "testemunha", exibicao: "opcao_exibicao10" },
-        { entradaUsuario: "descricao2", exibicao: "opcao_exibicao11" },
-        { entradaUsuario: "descricao3", exibicao: "opcao_exibicao12" }
-    ];
-
-    campos.forEach(campo => {
-        const entradaUsuario = document.getElementById(campo.entradaUsuario);
-        const exibicao = document.getElementById(campo.exibicao);
-
-        if (entradaUsuario && exibicao) {
-            exibicao.textContent = entradaUsuario.value;
-        }
+        criaEmailComDadosInseridosPeloUsuario();
     });
 
-    criaEmailComDadosInseridosPeloUsuario();
-});
+    function criaEmailComDadosInseridosPeloUsuario() {
+        var content = '';
 
+        var identificacaoRadio = document.querySelector('input[name="opcao"]:checked');
+        if (identificacaoRadio && identificacaoRadio.value === "ident-sim") {
+            content += `Usuário identificado, Nome: ${nomeDigitado}, CPF: ${cpfDigitado}, Email: ${emailDigitado}, Telefone: ${telefoneDigitado}\n\n`;
+        } else {
+            content += 'Usuário anônimo\n\n';
+        }
 
-function criaEmailComDadosInseridosPeloUsuario(){
-    var content = '';
+        // Verifica se os elementos existem antes de tentar acessar `textContent`
+        content += 'Qual a sua relação com a Plasdil?\n' + (document.getElementById('opcao_exibicao1')?.textContent || '') + '\n\n';
+        content += 'Qual o tipo de denúncia melhor se enquadra ao fato que você está registrando?\n' + (document.getElementById('opcao_exibicao2')?.textContent || '') + '\n\n';
+        content += 'Indique o local onde ocorreu o fato que você está denunciando:\n' + (document.getElementById('opcao_exibicao3')?.textContent || '') + '\n\n';
+        content += 'Indique a área/setor onde ocorreu o fato que você está denunciando:\n' + (document.getElementById('opcao_exibicao4')?.textContent || '') + '\n\n';
+        content += 'Como tomou conhecimento deste fato/transgressão?\n' + (document.getElementById('opcao_exibicao5')?.textContent || '') + '\n\n';
+        content += 'Você sabe se algum Diretor, Conselheiro, Gestor, Gerente ou Coordenador, está CIENTE do problema relatado?\n' + (document.getElementById('opcao_exibicao6')?.textContent || '') + '\n\n';
+        content += 'Você sabe se algum Diretor, Conselheiro, Gerente ou Coordenador está ENVOLVIDO diretamente no fato relatado?\n' + (document.getElementById('opcao_exibicao7')?.textContent || '') + '\n\n';
+        content += 'Você sabe se algum(ns) Diretor(es), Conselheiro(s), Gerente(s) ou Coordenador(es) tentou(ram) ESCONDER o problema relatado?\n' + (document.getElementById('opcao_exibicao8')?.textContent || '') + '\n\n';
+        content += 'O que você quer denunciar?\n' + (document.getElementById('opcao_exibicao9')?.textContent || '') + '\n\n';
+        content += 'Existem testemunhas? Em caso positivo, indique-as.\n' + (document.getElementById('opcao_exibicao10')?.textContent || '') + '\n\n';
+        content += 'Você sabe se existem evidências sobre o fato? Em caso positivo, indique-as. (Quais e em que lugar(es) podem ser encontradas evidências sobre o fato denunciado? Existem documentos que comprovam esse fato? Em caso positivo, onde podem ser encontrados? Especifique da forma mais detalhada possível. Lembre-se: qualquer informação pode ser útil, por mais irrelevante que ela pareça para você.)\n' + (document.getElementById('opcao_exibicao11')?.textContent || '') + '\n\n';
+        content += 'Caso seja possível, indique o valor financeiro envolvido no fato relatado:\n' + (document.getElementById('opcao_exibicao12')?.textContent || '') + '\n\n';
 
-    var identificacaoRadio = document.querySelector('input[name="opcao"]:checked');
-    if (identificacaoRadio && identificacaoRadio.value === "ident-sim") {
-        content += `Usuário identificado, Nome: ${nomeDigitado}, CPF: ${cpfDigitado}, Email: ${emailDigitado}, Telefone: ${telefoneDigitado}\n\n`;
-    } 
-    else {
-        content += 'Usuário anônimo\n\n';
+        const message = document.getElementById('message');
+        if (message) {
+            message.value = content;
+        }
     }
-
-    content += 'Qual a sua relação com a Plasdil?\n' + document.getElementById('opcao_exibicao1').textContent + '\n\n';
-    content += 'Qual o tipo de denúncia melhor se enquadra ao fato que você está registrando?\n' + document.getElementById('opcao_exibicao2').textContent + '\n\n';
-    content += 'Indique o local onde ocorreu o fato que você está denunciando:\n' + document.getElementById('opcao_exibicao3').textContent + '\n\n';
-    content += 'Indique a área/setor onde ocorreu o fato que você está denunciando:\n' + document.getElementById('opcao_exibicao4').textContent + '\n\n';
-    content += 'Como tomou conhecimento deste fato/transgressão?\n' + document.getElementById('opcao_exibicao5').textContent + '\n\n';
-    content += 'Você sabe se algum Diretor, Conselheiro, Gestor, Gerente ou Coordenador, está CIENTE do problema relatado?\n' + document.getElementById('opcao_exibicao6').textContent + '\n\n';
-    content += 'Você sabe se algum Diretor, Conselheiro, Gerente ou Coordenador está ENVOLVIDO diretamente no fato relatado?\n' + document.getElementById('opcao_exibicao7').textContent + '\n\n';
-    content += 'Você sabe se algum(ns) Diretor(es), Conselheiro (s), Gerente(s) ou Coordenador(es) tentou(ram) ESCONDER o problema relatado?\n' + document.getElementById('opcao_exibicao8').textContent + '\n\n';
-    content += 'O que você quer denunciar?\n' + document.getElementById('opcao_exibicao9').textContent + '\n\n';
-    content += 'Existem testemunhas? Em caso positivo, indique-as.\n' + document.getElementById('opcao_exibicao10').textContent + '\n\n';
-    content += `Você sabe se existem evidências sobre o fato? Em caso positivo, indique-as. (Quais e em que lugar(es) podem ser encontradas evidências sobre o fato denunciado? Existem documentos que comprovam esse fato? Em caso positivo, onde podem ser encontrados? Especifique da forma mais detalhada possível. Lembre-se: qualquer informação pode ser útil, por mais irrelevante que ela pareça para você.)\n` + document.getElementById('opcao_exibicao11').textContent + '\n\n';
-    content += 'Caso seja possível, indique o valor financeiro envolvido no fato relatado:\n' + document.getElementById('opcao_exibicao12').textContent + '\n\n';
-
-    document.getElementById('message').value = content;
 }
-
-// function coletarRespostas() {
-//     const respostaTextArea  = document.getElementById("message").value;
-//     var urlDestino = "finaliza-denuncia.html?conteudo=" + encodeURIComponent(respostaTextArea) 
-//     window.location.href = urlDestino;
-// }
 
 
 function coletarRespostas(event) {
@@ -379,6 +302,33 @@ function exibirOpcao() {
 
 window.onload = exibirOpcao;
 
+// Contador para identificar cada div de anexo
+let anexoIndex = 1; 
+
+function adicionarAnexo() {
+
+    const arquivoAnexo = document.createElement('div');
+    arquivoAnexo.className = 'file-upload mb-3'; 
+    arquivoAnexo.id = `div-imagem-${anexoIndex}`;
+    arquivoAnexo.style.display = 'flex';
+    arquivoAnexo.style.alignItems = 'center';
+
+    arquivoAnexo.innerHTML = `
+        <input type="file" id="input-imagens" class="form-control me-2 input-file-custom" /> 
+        <button class="btn btn-danger btn-sm remove-file" title="Remover">
+            <i class="bi bi-trash"></i>
+        </button>
+    `;
+
+    document.getElementById('file-upload-container').appendChild(arquivoAnexo);
+
+    arquivoAnexo.querySelector('.remove-file').addEventListener('click', function () {
+        arquivoAnexo.remove();
+    });
+
+    anexoIndex++;
+}
+
 function geraIdGuid(){
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = (Math.random() * 16) | 0,
@@ -413,33 +363,41 @@ if (mostraNumeroDeProtocolo) {
     document.getElementById("protocoloGerado").textContent = mostraNumeroDeProtocolo;
 }
 
+//Cadastrando a Denuncia com uma lista de imagens
+
 const botaoFinalizaDenuncia = document.getElementById("finalizar-denuncia");
 
 document.addEventListener("DOMContentLoaded", function() {
-    if(botaoFinalizaDenuncia){
+    if (botaoFinalizaDenuncia) {
         botaoFinalizaDenuncia.addEventListener("click", function() {
 
             alert("Sucesso, Enviando a denuncia");
-    
+
             const Id = geraIdGuid();
             const Mensagem = document.getElementById('respostaUsuario').value;
-    
-            const dados = {
-                Id,
-                Mensagem
-            };
-    
+
+            const formData = new FormData();
+            formData.append("Id", Id);
+            formData.append("Mensagem", Mensagem);
+
+            // Adiciona todas as imagens ao formData
+            const fileUploadContainer = document.getElementById('file-upload-container');
+            const inputFiles = fileUploadContainer.querySelectorAll('input[type="file"]');
+
+            inputFiles.forEach(inputFile => {
+                for (let i = 0; i < inputFile.files.length; i++) {
+                    formData.append("imagens", inputFile.files[i]);
+                }
+            });
+
             const urlDaAPI = "https://localhost:7114/api/denuncias";
             console.log(urlDaAPI);
-    
+
             const configuracao = {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(dados)
+                body: formData
             };
-    
+
             fetch(urlDaAPI, configuracao)
             .then(response => {
                 console.log(response);
@@ -453,7 +411,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     const numeroProtocolo = data.data.numero_Protocolo;
                     if (numeroProtocolo) {
                         console.log('Número de Protocolo:', numeroProtocolo);
-            
                         window.location.href = `protocolo-gerado.html?retornaNumeroDoBanco=${numeroProtocolo}`;
                     } else {
                         console.error('Número de Protocolo não encontrado na resposta da API');
@@ -466,9 +423,67 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(error => {
                 console.error('Erro:', error);
             });
-       });
+        });
     }
 });
+
+
+// document.addEventListener("DOMContentLoaded", function() {
+//     if(botaoFinalizaDenuncia){
+//         botaoFinalizaDenuncia.addEventListener("click", function() {
+
+//             alert("Sucesso, Enviando a denuncia");
+    
+//             const Id = geraIdGuid();
+//             const Mensagem = document.getElementById('respostaUsuario').value;
+    
+//             const dados = {
+//                 Id,
+//                 Mensagem
+//             };
+    
+//             const urlDaAPI = "https://localhost:7114/api/denuncias";
+//             console.log(urlDaAPI);
+    
+//             const configuracao = {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify(dados)
+//             };
+    
+//             fetch(urlDaAPI, configuracao)
+//             .then(response => {
+//                 console.log(response);
+//                 if (!response.ok) {
+//                     throw new Error('Erro na solicitação à API');
+//                 }
+//                 return response.json();
+//             })
+//             .then(data => {
+//                 if (data && data.data) {
+//                     const numeroProtocolo = data.data.numero_Protocolo;
+//                     if (numeroProtocolo) {
+//                         console.log('Número de Protocolo:', numeroProtocolo);
+            
+//                         window.location.href = `protocolo-gerado.html?retornaNumeroDoBanco=${numeroProtocolo}`;
+//                     } else {
+//                         console.error('Número de Protocolo não encontrado na resposta da API');
+//                     }
+//                 } else {
+//                     console.error('Estrutura inválida na resposta da API');
+//                 }
+//                 console.log('Sucesso', data);
+//             })
+//             .catch(error => {
+//                 console.error('Erro:', error);
+//             });
+//        });
+//     }
+// });
+
+
 
 document.addEventListener("DOMContentLoaded", async function() {
     const urlParams = new URLSearchParams(window.location.search);

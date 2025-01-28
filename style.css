@@ -38,7 +38,6 @@ body
 
 .menu li a:hover
 {
-   /* color: #151D78; */
    color: blue;
 }
 
@@ -46,7 +45,7 @@ body
 .hamburger-container {
     display: none;
     position: absolute;
-    top: 10px; /* Coloca o menu no final do container pai */
+    top: 10px;
     right: 0;
     border-radius: 5px;
 }
@@ -81,8 +80,8 @@ body
     }
 
     .mobile-menu li {
-        display: block; /* Alterado para exibir os itens verticalmente */
-        margin-bottom: 10px; /* Adicionado espaçamento entre os itens */
+        display: block; 
+        margin-bottom: 10px; 
     }
 }
 
@@ -178,7 +177,7 @@ th {
 }
 
 .pesquisa-protocolo input {
-    margin-right: 10px; /* Ajuste conforme necessário */
+    margin-right: 10px; 
     width: 50%;
 }
 
@@ -218,7 +217,7 @@ th {
 
 .icone-paragrafo {
     display: flex;
-    align-items: center; /* Alinha verticalmente os itens ao centro */
+    align-items: center; 
 }
 
 .iconeCopy{
@@ -231,3 +230,36 @@ th {
 }
 
 
+
+/* Pagina de Anexos , Finaliza Denuncia*/
+.file-upload {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.file-upload .file-input {
+    margin-right: 10px;
+}
+
+.file-upload .remove-file {
+    cursor: pointer;
+    color: #333;
+    background-color: #fff;
+}
+
+/* Reudizndo o tamanho dos campos da pagina denuncia.html */
+.campo-reduzido {
+    width: auto; 
+    display: inline-block; 
+    max-width: 376px; 
+}
+
+/* Input de files finaliza Denuncia */
+.input-file-custom {
+    width: auto; 
+    display: inline-block; 
+    max-width: 376px; 
+} 
+
+/* Comite Imagens */
